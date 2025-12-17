@@ -1,59 +1,54 @@
-name: Build Pharmacy Android App
+<WindowManager>:
+    DashboardScreen:
+    InventoryScreen:
 
-on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:
+<DashboardScreen>:
+    name: "dashboard"
+    BoxLayout:
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: (0.95, 0.95, 0.95, 1)
+            Rectangle:
+                pos: self.pos
+                size: self.size
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+        Label:
+            text: "صيدلية البركة - لوحة التحكم"
+            font_size: '24sp'
+            size_hint_y: 0.2
+            color: (0, 0.4, 0.7, 1)
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+        GridLayout:
+            cols: 2
+            padding: dp(10)
+            spacing: dp(10)
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
+            Button:
+                text: "إجمالي الأدوية: " + root.total_meds
+                background_color: (0.2, 0.6, 1, 1)
+            
+            Button:
+                text: "المخزن"
+                on_release: app.root.current = "inventory"
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
+<InventoryScreen>:
+    name: "inventory"
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: "قائمة الأدوية"
+            size_hint_y: 0.1
+        
+        ScrollView:
+            GridLayout:
+                cols: 1
+                size_hint_y: None
+                height: self.minimum_height
+                id: container
+                # هنا يتم إضافة العناصر برمجياً
 
-      - name: Install System Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            git zip unzip \
-            build-essential \
-            autoconf automake libtool pkg-config \
-            cmake \
-            libffi-dev \
-            libssl-dev \
-            zlib1g-dev \
-            libncurses-dev \
-            libtinfo-dev \
-            python3-pip \
-            python3-setuptools \
-            python3-wheel \
-            python3-venv
-
-          python -m pip install --upgrade pip
-          pip install cython==0.29.33 buildozer virtualenv
-
-      - name: Build APK with Buildozer
-        run: |
-          export APP_ANDROID_ACCEPT_SDK_LICENSE=1
-          yes | buildozer -v android debug
-        env:
-          GRADLE_OPTS: "-Dorg.gradle.daemon=false"
-
-      - name: Upload APK Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: Pharmacy-Android-App
-          path: bin/*.apk
+        Button:
+            text: "العودة للرئيسية"
+            size_hint_y: 0.1
+            on_release: app.root.current = "dashboard"
