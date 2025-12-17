@@ -26,16 +26,28 @@ jobs:
 
       - name: Install System Dependencies
         run: |
-          sudo apt update
-          sudo apt install -y git zip unzip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
-          # تثبيت الأدوات الأساسية بشكل منفصل لضمان النجاح
+          sudo apt-get update
+          sudo apt-get install -y \
+            git zip unzip \
+            build-essential \
+            autoconf automake libtool pkg-config \
+            cmake \
+            libffi-dev \
+            libssl-dev \
+            zlib1g-dev \
+            libncurses-dev \
+            libtinfo-dev \
+            python3-pip \
+            python3-setuptools \
+            python3-wheel \
+            python3-venv
+
           python -m pip install --upgrade pip
-          pip install --user Cython==0.29.33 buildozer virtualenv
+          pip install cython==0.29.33 buildozer virtualenv
 
       - name: Build APK with Buildozer
         run: |
           export APP_ANDROID_ACCEPT_SDK_LICENSE=1
-          # الموافقة على التراخيص وبدء البناء
           yes | buildozer -v android debug
         env:
           GRADLE_OPTS: "-Dorg.gradle.daemon=false"
