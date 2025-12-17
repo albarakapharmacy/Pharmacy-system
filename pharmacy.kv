@@ -1,0 +1,54 @@
+<WindowManager>:
+    DashboardScreen:
+    InventoryScreen:
+
+<DashboardScreen>:
+    name: "dashboard"
+    BoxLayout:
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: (0.95, 0.95, 0.95, 1)
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Label:
+            text: "صيدلية البركة - لوحة التحكم"
+            font_size: '24sp'
+            size_hint_y: 0.2
+            color: (0, 0.4, 0.7, 1)
+
+        GridLayout:
+            cols: 2
+            padding: dp(10)
+            spacing: dp(10)
+
+            Button:
+                text: "إجمالي الأدوية: " + root.total_meds
+                background_color: (0.2, 0.6, 1, 1)
+            
+            Button:
+                text: "المخزن"
+                on_release: app.root.current = "inventory"
+
+<InventoryScreen>:
+    name: "inventory"
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: "قائمة الأدوية"
+            size_hint_y: 0.1
+        
+        ScrollView:
+            GridLayout:
+                cols: 1
+                size_hint_y: None
+                height: self.minimum_height
+                id: container
+                # هنا يتم إضافة العناصر برمجياً
+
+        Button:
+            text: "العودة للرئيسية"
+            size_hint_y: 0.1
+            on_release: app.root.current = "dashboard"
