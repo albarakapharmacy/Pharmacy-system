@@ -1,1 +1,40 @@
+name: Build Pharmacy Android App
 
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y git zip unzip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
+          pip install --user --upgrade buildozer cython virtualenv
+
+      - name: Build APK with Buildozer
+        run: |
+          export APP_ANDROID_ACCEPT_SDK_LICENSE=1
+          buildozer -v android debug
+        env:
+          GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Pharmacy-Android-App
+          path: bin/*.apk
+          
