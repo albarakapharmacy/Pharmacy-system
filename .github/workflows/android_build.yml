@@ -2,8 +2,7 @@ name: Build Pharmacy Android App
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -17,23 +16,35 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.9'
+          python-version: '3.10'
 
-      - name: Install dependencies
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Install System Dependencies
         run: |
           sudo apt update
           sudo apt install -y git zip unzip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
-          pip install --user --upgrade buildozer cython virtualenv
+          # تثبيت الأدوات الأساسية بشكل منفصل لضمان النجاح
+          python -m pip install --upgrade pip
+          pip install --user Cython==0.29.33 buildozer virtualenv
 
       - name: Build APK with Buildozer
         run: |
           export APP_ANDROID_ACCEPT_SDK_LICENSE=1
-          buildozer -v android debug
+          # الموافقة على التراخيص وبدء البناء
+          yes | buildozer -v android debug
         env:
           GRADLE_OPTS: "-Dorg.gradle.daemon=false"
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
+        with:
+          name: Pharmacy-Android-App
+          path: bin/*.apk
         with:
           name: Pharmacy-Android-App
           path: bin/*.apk
