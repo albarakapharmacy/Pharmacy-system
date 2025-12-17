@@ -1,7 +1,3 @@
-# ==========================================
-# ملف إعدادات Buildozer لتطبيق صيدلية البركة
-# ==========================================
-
 [app]
 # (str) عنوان التطبيق
 title = Pharmacy Al-Baraka
@@ -15,41 +11,39 @@ package.domain = org.sultan
 # (str) مسار الكود المصدري
 source.dir = .
 
-# (list) الامتدادات المضمنة في البناء
-source.include_exts = py,png,jpg,db,csv
+# (list) الامتدادات المضمنة
+source.include_exts = py,png,jpg,db,csv,kv
 
 # (str) إصدار التطبيق
 version = 1.0
 
-# (list) المتطلبات (نفس ما في ملف requirements.txt)
-# ملاحظة: تم إضافة kivy و jnius لدعم البيئة البرمجية في أندرويد
-requirements = python3,tkcalendar,babel,pytz,sqlite3
+# (list) المتطلبات - تم إزالة Tkinter وإضافة Kivy
+# ملاحظة: sqlite3 مدمجة في بايثون أندرويد لذا نكتفي بذكر python3 و kivy
+requirements = python3,kivy
 
-# (str) اسم الملف الرئيسي للكود
-# تأكد أن ملف الكود الخاص بك يسمى main.py ليعمل بشكل صحيح
+# (str) الملف الرئيسي
 source.filename = main.py
 
-# (list) الأذونات المطلوبة في أندرويد
-android.permissions = WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE
+# (list) الأذونات - أندرويد 11+ يتطلب أذونات خاصة للذاكرة
+android.permissions = INTERNET, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE
 
-# (int) مستوى الـ API المستهدف (33 متوافق مع متطلبات جوجل الحالية)
+# (int) مستوى الـ API المستهدف
 android.api = 33
 
 # (int) الحد الأدنى للـ API
 android.minapi = 21
 
-# (str) اتجاه الشاشة (landscape أو portrait)
+# (str) اتجاه الشاشة 
 orientation = landscape
 
-# (bool) هل التطبيق ملء الشاشة؟
+# (bool) ملء الشاشة
 fullscreen = 0
 
-# (list) معمارية المعالج (للأجهزة الحديثة)
+# (list) معمارية المعالج
 android.archs = arm64-v8a, armeabi-v7a
 
-# ==========================================
-# ملاحظة تقنية هامة جداً:
-# مكتبة Tkinter لا تعمل بشكل افتراضي وسهل على أندرويد
-# هذا الملف سيحاول البناء، ولكن يفضل برمجياً استخدام 
-# Kivy أو Flet بدلاً من Tkinter إذا كان الهدف الأساسي هو الأندرويد.
-# ==========================================
+# (bool) السماح بالنسخ الاحتياطي
+android.allow_backup = True
+
+# (list) المجلدات المضمنة (مثل مجلد قاعدة البيانات)
+# source.include_dirs = db
