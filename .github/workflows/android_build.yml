@@ -45,6 +45,3 @@ jobs:
         with:
           name: Pharmacy-Android-App
           path: bin/*.apk
-        with:
-          name: Pharmacy-Android-App
-          path: bin/*.apk
