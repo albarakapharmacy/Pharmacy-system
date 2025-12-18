@@ -1,0 +1,50 @@
+pharmacy_app/
+│
+├── main.py                    # نقطة تشغيل التطبيق
+├── pharmacy.kv                # الواجهة العامة (Root Layout)
+├── buildozer.spec             # إعدادات تحويل التطبيق إلى APK
+├── requirements.txt           # المكتبات المطلوبة
+│
+├── assets/                    # الصور – الأيقونات – الخطوط
+│   ├── images/
+│   │   └── logo.png
+│   └── fonts/
+│       └── Cairo-Regular.ttf
+│
+├── db/                        # قاعدة البيانات
+│   ├── __init__.py
+│   ├── database.py            # الاتصال بـ SQLite
+│   ├── models.py              # إنشاء الجداول
+│   └── seed.py                # بيانات تجريبية (اختياري)
+│
+├── screens/                   # شاشات التطبيق
+│   ├── __init__.py
+│   ├── dashboard.py           # لوحة التحكم
+│   ├── inventory.py           # إدارة الأدوية
+│   ├── customers.py           # المرضى والعملاء
+│   ├── suppliers.py           # الموردين
+│   ├── sales.py               # فواتير الصرف
+│   ├── prescriptions.py       # الوصفات الطبية
+│   ├── reports.py             # التقارير
+│   └── expiry.py              # منتهية الصلاحية
+│
+├── services/                  # منطق العمل (Business Logic)
+│   ├── __init__.py
+│   ├── product_service.py     # عمليات الأدوية
+│   ├── sales_service.py       # حساب الفواتير
+│   ├── report_service.py      # توليد التقارير
+│   └── barcode_service.py     # الباركود
+│
+├── widgets/                   # مكونات قابلة لإعادة الاستخدام
+│   ├── __init__.py
+│   ├── tables.py
+│   ├── dialogs.py
+│   └── alerts.py
+│
+├── utils/                     # أدوات مساعدة
+│   ├── __init__.py
+│   ├── helpers.py             # تواريخ – تحويلات
+│   ├── constants.py           # ثوابت
+│   └── validators.py          # التحقق من الإدخال
+│
+└── README.md                  # شرح المشروع
