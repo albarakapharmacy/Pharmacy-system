@@ -1,49 +1,54 @@
 [app]
-# (str) عنوان التطبيق
-title = Pharmacy Al-Baraka
-
-# (str) اسم الحزمة (Package name)
-package.name = albaraka_pharmacy
-
-# (str) اسم النطاق للحزمة
-package.domain = org.sultan
-
-# (str) مسار الكود المصدري
+title = PharmacyApp
+package.name = pharmacyapp
+package.domain = org.albarakapharmacy
 source.dir = .
-
-# (list) الامتدادات المضمنة
-source.include_exts = py,png,jpg,db,csv,kv
-
-# (str) إصدار التطبيق
+source.include_exts = py,png,jpg,kv,atlas,db
 version = 1.0
 
-# (list) المتطلبات - تم إزالة Tkinter وإضافة Kivy
-# ملاحظة: sqlite3 مدمجة في بايثون أندرويد لذا نكتفي بذكر python3 و kivy
-requirements = python3,kivy
+# اسم ملف Python الرئيسي
+main.py = main.py
 
-# (str) الملف الرئيسي
-source.filename = main.py
+requirements = python3,kivy,sqlite3
 
-# (list) الأذونات - أندرويد 11+ يتطلب أذونات خاصة للذاكرة
-android.permissions = INTERNET, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE
+orientation = portrait
 
-# (int) مستوى الـ API المستهدف
-android.api = 33
+# أيقونة (اختياري) ضع مسار أيقونتك هنا
+# icon.filename = %(source.dir)s/icon.png
 
-# (int) الحد الأدنى للـ API
+# الحد الأدنى لإصدار Android (21 = Android 5.0)
 android.minapi = 21
 
-# (str) اتجاه الشاشة 
-orientation = landscape
+# الإصدار المستهدف
+android.sdk = 33
 
-# (bool) ملء الشاشة
-fullscreen = 0
+# دعم التوجيه العربي
+android.extra_args = --resource-config-ar
 
-# (list) معمارية المعالج
-android.archs = arm64-v8a, armeabi-v7a
+# لمنع إطفاء الشاشة أثناء العمل
+android.presplash_color = #1976D2
 
-# (bool) السماح بالنسخ الاحتياطي
-android.allow_backup = True
+# حفظ بيانات التطبيق (يضع db تلقائيا في مجلد app)
+android.permission = WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE
 
-# (list) المجلدات المضمنة (مثل مجلد قاعدة البيانات)
-# source.include_dirs = db
+# دعم ضغط ملف apk
+android.debug = 1
+
+# تضمين جميع ملفات kv والصور الافتراضية
+include_exts = py,kv,png,jpg,db
+
+# لمنع التضييق على الأذونات
+android.permissions = WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE,INTERNET
+
+# دعم للتخزين الداخلي
+# (جرب التطبيق دون هذا السطر غالبًا يعمل تلقائياً مع كودك)
+
+# لغة برمجة الجافا سكريبت إن كنت بحاجة اليها لاحقاً
+# android.add_javac_classes = org/example/myclass.java
+
+# ----------------------
+# لا تعدل هذه الأسطر بدون معرفة
+# ----------------------
+[buildozer]
+log_level = 2
+warn_on_root = 1
