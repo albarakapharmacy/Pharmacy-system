@@ -1,40 +1,92 @@
-#:kivy 2.2.1
+ScreenManager:
+    LoginScreen:
+    DashboardScreen:
+    InventoryScreen:
+    SalesScreen:
+    ReportsScreen:
+    ExpiryScreen:
 
-RootManager:
-    Dashboard:
-    Inventory:
-    Sales:
-
-<Dashboard>:
-    name: 'dashboard'
+<LoginScreen>:
     BoxLayout:
         orientation: 'vertical'
         Label:
-            text: root.welcome
+            text: 'تسجيل الدخول'
+        TextInput:
+            hint_text: 'اسم المستخدم'
+        TextInput:
+            hint_text: 'كلمة المرور'
+            password: True
+        Button:
+            text: 'دخول'
+            on_press: app.root.current = 'dashboard'
+            
+            
+            #:import dp kivy.metrics.dp
+
+ScreenManager:
+
+    DashboardScreen:
+        name: 'dashboard'
+
+    InventoryScreen:
+        name: 'inventory'
+
+    SalesScreen:
+        name: 'sales'
+
+    CustomersScreen:
+        name: 'customers'
+
+    SuppliersScreen:
+        name: 'suppliers'
+
+    ReportsScreen:
+        name: 'reports'
+
+
+<DashboardScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'لوحة التحكم'
             font_size: '22sp'
-        Button:
-            text: 'المخزون'
-            on_release: app.root.current = 'inventory'
-        Button:
-            text: 'المبيعات'
-            on_release: app.root.current = 'sales'
 
-<Inventory>:
-    name: 'inventory'
+
+<InventoryScreen>:
     BoxLayout:
         orientation: 'vertical'
         Label:
-            text: 'إدارة المخزون'
-        Button:
-            text: 'عودة'
-            on_release: app.root.current = 'dashboard'
+            text: 'إدارة الأدوية'
+            font_size: '22sp'
 
-<Sales>:
-    name: 'sales'
+
+<SalesScreen>:
     BoxLayout:
         orientation: 'vertical'
         Label:
-            text: 'المبيعات'
-        Button:
-            text: 'عودة'
-            on_release: app.root.current = 'dashboard'
+            text: 'فواتير المبيعات'
+            font_size: '22sp'
+
+
+<CustomersScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'العملاء'
+            font_size: '22sp'
+
+
+<SuppliersScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'الموردين'
+            font_size: '22sp'
+
+
+<ReportsScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'التقارير'
+            font_size: '22sp'
