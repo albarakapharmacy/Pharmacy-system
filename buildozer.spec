@@ -1,21 +1,20 @@
 [app]
-title = Pharmacy Al-Baraka
-package.name = pharmacy
-package.domain = org.albaraka
-
+title = PharmacyApp
+package.name = pharmacyapp
+package.domain = org.albarakapharmacy
 source.dir = .
-source.include_exts = py,kv,png,jpg,db,ttf,csv
-
+source.include_exts = py,png,jpg,kv,atlas,db
 version = 1.0
+main.py = main.py
 
-requirements = python3,kivy,sqlite3,pyzbar,pillow,plyer
+requirements = python3,kivy,sqlite3
 
-orientation = landscape
-fullscreen = 0
-
-android.permissions = CAMERA, WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE
-android.api = 33
+orientation = portrait
 android.minapi = 21
-android.archs = arm64-v8a, armeabi-v7a
+android.sdk = 33
+include_exts = py,kv,png,jpg,db
+android.permissions = WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE,INTERNET
 
+[buildozer]
 log_level = 2
+warn_on_root = 1
