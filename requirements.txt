@@ -1,5 +1,1 @@
-python3
 kivy
-pyzbar
-pillow
-sqlite3
