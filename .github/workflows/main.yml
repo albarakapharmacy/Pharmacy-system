@@ -82,14 +82,12 @@ jobs:
     # Name of Maven Toolchain Vendor if the default name of "${distribution}" is not wanted. See examples of supported syntax in Advanced Usage file
     mvn-toolchain-vendor: # optional
 
-                      - name: Upload a Build Artifact
-  uses: actions/upload-artifact@v6.0.0
+                      - name: Upload Build Artifact
+  uses: actions/upload-artifact@v3
   with:
-    # Artifact name
-    name: # optional, default is artifact
-    # A file, directory or wildcard pattern that describes what to upload
-    path: 
-    # The desired behavior if no files are found using the provided path.
+    name: PharmacyApp
+    path: path/to/generated/file/or/folder  # ضع هنا اسم الملف أو المجلد الناتج عن البناء
+  
 Available Options:
   warn: Output a warning but do not fail the action
   error: Fail the action with an error message
