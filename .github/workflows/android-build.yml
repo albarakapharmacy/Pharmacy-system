@@ -28,8 +28,7 @@ jobs:
           pip install --upgrade pip setuptools cython buildozer
 
       - name: Build APK with Buildozer
-        run: |
-          buildozer -v android debug
+        run: buildozer -v android debug
 
       - name: Find APK path
         id: apk_path
