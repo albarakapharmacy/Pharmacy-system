@@ -43,3 +43,7 @@ jobs:
           files: ${{ steps.apk_path.outputs.apk_result }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+- name: Install pip
+  run: |
+    python3 -m ensurepip --upgrade
+    python3 -m pip install --upgrade pip
